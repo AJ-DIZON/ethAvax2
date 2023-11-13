@@ -26,12 +26,6 @@ function App() {
       const contract = new ethers.Contract(conAdd,greetABI.abi,provider);
 
       try {
-        // Call Greeter.greet() and display current greeting in `console`
-        /* 
-          function greet() public view returns (string memory) {
-            return greeting;
-          }
-        */
         const data = await contract.getHello();
         console.log("data: ", data);
         setGreeting(data);
