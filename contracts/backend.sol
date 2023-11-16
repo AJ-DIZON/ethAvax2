@@ -7,13 +7,17 @@ pragma solidity ^0.8.9;
 contract backend {
     
     string public hello;
-
+    string public say;
     constructor(){
         hello = "Hello User";
+        say = "Nice to meet you all";
     }
 
     function getHello() public view returns (string memory) {
         return hello;
     }
 
+    function getSay() public view returns (string memory) {
+        return say;
+    }
 }

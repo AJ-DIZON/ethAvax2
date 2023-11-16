@@ -8,6 +8,7 @@ const conAdd = "0x5FbDB2315678afecb367f032d93F642f64180aa3";
 function App() {
   //Property Variables
       const [greet, setGreeting] = useState('');
+      const [say, setSay] = useState('');
   //
 
   // Requests access to the user's Meta Mask Account
@@ -34,6 +35,24 @@ function App() {
       }
     }
   }
+
+  async function fetchSay() {
+    await requestAccount();
+
+    // If MetaMask exists
+    if (typeof window.ethereum !== "undefined") {
+      const provider2 = new ethers.BrowserProvider(window.ethereum);
+      const contract2 = new ethers.Contract(conAdd,greetABI.abi,provider2);
+
+      try {
+        const data2 = await contract2.getSay();
+        console.log("data: ", data2);
+        setSay(data2);
+      } catch (error) {
+        console.log("Error: ", error);
+      }
+    }
+  }
   return (<div align= 'center'>
     <div>
       <h2>Hello User</h2>
@@ -42,7 +61,13 @@ function App() {
     <input
           onChange={(e) => setGreeting(e.target.value)}
           value={greet}
-          placeholder="placeholder"
+          placeholder="placeholder 1"
+    />
+    <button onClick={fetchSay}>Say nice to meet you</button>
+    <input
+          onChange={(e) => setSay(e.target.value)}
+          value={say}
+          placeholder="placeholder 2"
     />
   </div>);
 }
