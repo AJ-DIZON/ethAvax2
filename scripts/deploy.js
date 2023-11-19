@@ -2,7 +2,7 @@ const hre = require("hardhat");
 
 async function main() {
   const Back = await hre.ethers.getContractFactory('backend');
-  const back = await Back.deploy();
+  const back = await Back.deploy('');
   await back.waitForDeployment();
 
   console.log(`Contract deployed to ${back.target}`);
